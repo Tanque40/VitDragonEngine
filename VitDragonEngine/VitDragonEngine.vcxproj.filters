@@ -1,42 +1,46 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="VitDragonEngine">
+      <UniqueIdentifier>{E92792AE-55B3-FF72-5EC4-8267CACE5B73}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="VitDragonEngine\Events">
+      <UniqueIdentifier>{ADB32031-99AD-4983-821A-E0936EB3AFEF}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\VitDragonEngine\Core.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClInclude Include="src\VitDragonEngine.h" />
     <ClInclude Include="src\VitDragonEngine\Application.h">
-      <Filter>Header Files</Filter>
+      <Filter>VitDragonEngine</Filter>
     </ClInclude>
-    <ClInclude Include="src\VitDragonEngine.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\VitDragonEngine\Core.h">
+      <Filter>VitDragonEngine</Filter>
     </ClInclude>
     <ClInclude Include="src\VitDragonEngine\EntryPoint.h">
-      <Filter>Header Files</Filter>
+      <Filter>VitDragonEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VitDragonEngine\Events\ApplicationEvent.h">
+      <Filter>VitDragonEngine\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VitDragonEngine\Events\Event.h">
+      <Filter>VitDragonEngine\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VitDragonEngine\Events\KeyEvent.h">
+      <Filter>VitDragonEngine\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VitDragonEngine\Events\MouseEvent.h">
+      <Filter>VitDragonEngine\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\VitDragonEngine\Log.h">
-      <Filter>Header Files</Filter>
+      <Filter>VitDragonEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\VitDragonEngine\Application.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>VitDragonEngine</Filter>
     </ClCompile>
     <ClCompile Include="src\VitDragonEngine\Log.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>VitDragonEngine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
