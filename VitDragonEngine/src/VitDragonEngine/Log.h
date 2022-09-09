@@ -2,6 +2,7 @@
 
 #include "Core.h"
 #include "spdlog/spdlog.h"
+#include "spdlog/fmt/ostr.h"
 
 namespace VitDragonEngine{
 
@@ -27,11 +28,11 @@ namespace VitDragonEngine{
 #define VDE_CORE_FATAL(...)		::VitDragonEngine::Log::GetCoreLogger()->fatal(__VA_ARGS__)
 
 // Client log macros
-#define VDE_CLIENT_TRACE(...)		::VitDragonEngine::Log::GetClientLogger()->trace(__VA_ARGS__)
-#define VDE_CLIENT_INFO(...)		::VitDragonEngine::Log::GetClientLogger()->info(__VA_ARGS__)
-#define VDE_CLIENT_WARN(...)		::VitDragonEngine::Log::GetClientLogger()->warn(__VA_ARGS__)
-#define VDE_CLIENT_ERROR(...)		::VitDragonEngine::Log::GetClientLogger()->error(__VA_ARGS__)
-#define VDE_CLIENT_FATAL(...)		::VitDragonEngine::Log::GetClientLogger()->fatal(__VA_ARGS__)
+#define VDE_TRACE(...)		::VitDragonEngine::Log::GetClientLogger()->trace(__VA_ARGS__)
+#define VDE_INFO(...)		::VitDragonEngine::Log::GetClientLogger()->info(__VA_ARGS__)
+#define VDE_WARN(...)		::VitDragonEngine::Log::GetClientLogger()->warn(__VA_ARGS__)
+#define VDE_ERROR(...)		::VitDragonEngine::Log::GetClientLogger()->error(__VA_ARGS__)
+#define VDE_FATAL(...)		::VitDragonEngine::Log::GetClientLogger()->fatal(__VA_ARGS__)
 
 // if dist build
 #define VDE_CORE_INFO

@@ -9,7 +9,7 @@ extern VitDragonEngine::Application *VitDragonEngine::CreateApplication();
 		VitDragonEngine::Log::Init();
 		VDE_CORE_WARN("Initialiazed Log!");
 		int a = 5;
-		VDE_CLIENT_INFO("Hi! var={0}", a);
+		VDE_INFO("Hi! var={0}", a);
 
 		auto app = VitDragonEngine::CreateApplication();
 		app->Run();
