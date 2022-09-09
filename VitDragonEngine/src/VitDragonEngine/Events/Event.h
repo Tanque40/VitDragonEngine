@@ -1,5 +1,6 @@
 #pragma once
 
+#include "vdepch.h"
 #include "VitDragonEngine/Core.h"
 
 namespace VitDragonEngine {

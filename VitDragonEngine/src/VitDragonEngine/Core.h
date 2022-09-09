@@ -10,4 +10,13 @@
 	#error VitDragonEngine only support Windows
 #endif
 
+#ifdef VDE_ENABLE_ASSERTS
+	#define VDE_ASSERT(x, ...){ if(!(x)){ VDE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+	#define VDE_CORE_ASSERT(x, ...){ if(!(x)){ VDE_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+#else
+	#define VDE_ASSERT(x, ...)
+	#define VDE_CORE_ASSERT(x, ...)
+#endif
+
+
 #define BIT(x) (1 << x)

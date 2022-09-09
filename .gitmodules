@@ -1,3 +1,6 @@
 [submodule "VitDragonEngine/vendor/spdlog"]
 	path = VitDragonEngine/vendor/spdlog
 	url = git@github.com:gabime/spdlog.git
+[submodule ".\\VitDragonEngine\\vendor\\GLFW"]
+	path = .\\VitDragonEngine\\vendor\\GLFW
+	url = git@github.com:TheCherno/glfw.git

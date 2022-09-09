@@ -12,6 +12,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include "VitDragonEngine/Log.h"
+
 #ifdef VDE_PLATFORM_WINDOWS
 	#include <Windows.h>
 #endif
