@@ -9,6 +9,12 @@ workspace "VitDragonEngine"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "VitDragonEngine/vendor/GLFW/include"
+
+include "VitDragonEngine/vendor/GLFW" -- Search for lua files
+
 project "VitDragonEngine"
 	location "VitDragonEngine"
 	kind "SharedLib"
@@ -27,7 +33,13 @@ project "VitDragonEngine"
 
 	includedirs {
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links{
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"
