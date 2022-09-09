@@ -2,9 +2,6 @@
 
 #include "VitDragonEngine/Core.h"
 
-#include <functional>
-#include <string>
-
 namespace VitDragonEngine {
 
 // Events in VitDragonEngine are currently blocking, meaning when an event occurss it

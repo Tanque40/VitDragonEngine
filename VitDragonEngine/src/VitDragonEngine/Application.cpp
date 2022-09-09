@@ -1,3 +1,4 @@
+#include "vdepch.h"
 #include "Application.h"
 
 #include "VitDragonEngine/Events/ApplicationEvent.h"
@@ -14,7 +15,7 @@ namespace VitDragonEngine{
 	void Application::Run(){
 
 		WindowResizeEvent e( 1280, 720 );
-		if( e.IsInCategory( EventCategoryApplication ) ){
+		if( e.IsInCategory( EventCategoryApplication ) ){ 
 			VDE_TRACE( e );
 		}
 		if( e.IsInCategory( EventCategoryInput ) ){

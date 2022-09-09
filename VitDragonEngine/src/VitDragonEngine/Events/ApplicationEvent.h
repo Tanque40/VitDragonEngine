@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace VitDragonEngine{
 
 	class VITDRAGONENGINE_API WindowResizeEvent : public Event{

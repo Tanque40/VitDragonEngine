@@ -17,6 +17,9 @@ project "VitDragonEngine"
 	targetdir("bin/" .. outputdir .. "/%{prj.name}")
 	objdir("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	pchheader "vdepch.h"
+	pchsource "VitDragonEngine/src/vdepch.cpp"
+
 	files {
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp"
