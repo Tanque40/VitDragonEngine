@@ -1,10 +1,11 @@
 #pragma once
 
 #include "Core.h"
-#include "Events/Event.h"
-#include "VitDragonEngine/Events/ApplicationEvent.h"
 
 #include "Window.h"
+#include "VitDragonEngine/LayerStack.h"
+#include "VitdragonEngine/Events/Event.h"
+#include "VitDragonEngine/Events/ApplicationEvent.h"
 
 namespace VitDragonEngine{
 
@@ -17,11 +18,14 @@ namespace VitDragonEngine{
 
 		void OnEvent( Event &e );
 
+		void PushLayer( Layer *layer );
+		void PushOverlay( Layer *layer );
 	private:
 		bool OnWindowClose( WindowCloseEvent &e );
 
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;
+		LayerStack m_LayerStack;
 	};
 
 	// To be define in the client side

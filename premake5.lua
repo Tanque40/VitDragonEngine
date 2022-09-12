@@ -58,14 +58,17 @@ project "VitDragonEngine"
 
 	filter "configurations:Debug"
 		defines "VDE_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "VDE_RELEASE"
+		buildoptions "/MD"
 		symbols "On"
 
 	filter "configurations:Dist"
 		defines "VDE_DIST"
+		buildoptions "/MD"
 		symbols "On"
 
 project "SandBox"
@@ -101,12 +104,15 @@ project "SandBox"
 
 	filter "configurations:Debug"
 		defines "VDE_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "VDE_RELEASE"
+		buildoptions "/MD"
 		symbols "On"
 
 	filter "configurations:Dist"
 		defines "VDE_DIST"
+		buildoptions "/MD"
 		symbols "On"
