@@ -5,6 +5,8 @@
 #include "VitDragonEngine/Events/MouseEvent.h"
 #include "VitDragonEngine/Events/KeyEvent.h"
 
+#include <glad/glad.h>
+
 namespace VitDragonEngine{
 
 	static bool s_GLFWInitialized = false;
@@ -42,6 +44,8 @@ namespace VitDragonEngine{
 
 		m_Window = glfwCreateWindow( ( int ) props.Width, ( int ) props.Height, m_Data.Title.c_str(), nullptr, nullptr );
 		glfwMakeContextCurrent( m_Window );
+		int status = gladLoadGLLoader( ( GLADloadproc ) glfwGetProcAddress );
+		VDE_CORE_ASSERT( status, "Failed to initialize Glad" );
 		glfwSetWindowUserPointer( m_Window, &m_Data );
 		SetVSync( true );
 
@@ -81,6 +85,12 @@ namespace VitDragonEngine{
 						break;
 				}
 			}
+		} );
+
+		glfwSetCharCallback( m_Window, []( GLFWwindow *window, unsigned int character ){
+			WindowData &data = *( WindowData * ) glfwGetWindowUserPointer( window );
+			KeyTypedEvent event( character );
+			data.EventCallback( event );
 		} );
 
 		glfwSetMouseButtonCallback( m_Window, []( GLFWwindow *window, int button, int action, int mods ){

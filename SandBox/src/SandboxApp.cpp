@@ -18,6 +18,7 @@ class SandBox : public VitDragonEngine::Application{
 public:
 	SandBox(){
 		PushLayer( new ExampleLayer() );
+		PushOverlay( new VitDragonEngine::ImGuiLayer() );
 	}
 
 	~SandBox(){

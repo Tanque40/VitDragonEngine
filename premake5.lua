@@ -12,8 +12,12 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "VitDragonEngine/vendor/GLFW/include"
+IncludeDir["Glad"] = "VitDragonEngine/vendor/Glad/include"
+IncludeDir["ImGui"] = "VitDragonEngine/vendor/imgui/"
 
 include "VitDragonEngine/vendor/GLFW" -- Search for lua files
+include "VitDragonEngine/vendor/Glad" -- Search for lua files
+include "VitDragonEngine/vendor/imgui" -- Search for lua files
 
 project "VitDragonEngine"
 	location "VitDragonEngine"
@@ -34,11 +38,15 @@ project "VitDragonEngine"
 	includedirs {
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links{
 		"GLFW",
+		"Glad",
+		"ImGui",
 		"opengl32.lib"
 	}
 
@@ -49,7 +57,8 @@ project "VitDragonEngine"
 
 		defines {
 			"VDE_PLATFORM_WINDOWS",
-			"VDE_BUILD_DLL"
+			"VDE_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands{

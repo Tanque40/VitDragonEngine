@@ -4,3 +4,6 @@
 [submodule ".\\VitDragonEngine\\vendor\\GLFW"]
 	path = .\\VitDragonEngine\\vendor\\GLFW
 	url = git@github.com:TheCherno/glfw.git
+[submodule "VitDragonEngine/vendor/imgui"]
+	path = VitDragonEngine/vendor/imgui
+	url = git@github.com:TheCherno/imgui.git
