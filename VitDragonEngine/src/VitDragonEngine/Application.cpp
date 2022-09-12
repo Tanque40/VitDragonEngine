@@ -1,18 +1,29 @@
 #include "vdepch.h"
 #include "Application.h"
 
-#include "VitDragonEngine/Events/ApplicationEvent.h"
 #include "VitDragonEngine/Log.h"
 
 #include <GLFW/glfw3.h>
 
 namespace VitDragonEngine{
 
+#define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
+
 	VitDragonEngine::Application::Application(){
 		m_Window = std::unique_ptr<Window>( Window::Create() );
+		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 	}
 
 	VitDragonEngine::Application::~Application(){
+	}
+
+
+	void Application::OnEvent( Event &e ){
+		EventDispatcher dispatcher( e );
+
+		dispatcher.Dispatch<WindowCloseEvent>( BIND_EVENT_FN( OnWindowClose ) );
+
+		VDE_CORE_TRACE("{0}", e);
 	}
 
 	void Application::Run(){
@@ -24,4 +35,8 @@ namespace VitDragonEngine{
 		}
 	}
 
+	bool Application::OnWindowClose( WindowCloseEvent &e ){
+		m_Running = false;
+		return true;
+	}
 }

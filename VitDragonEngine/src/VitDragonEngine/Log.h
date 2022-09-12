@@ -33,6 +33,3 @@ namespace VitDragonEngine{
 #define VDE_WARN(...)		::VitDragonEngine::Log::GetClientLogger()->warn(__VA_ARGS__)
 #define VDE_ERROR(...)		::VitDragonEngine::Log::GetClientLogger()->error(__VA_ARGS__)
 #define VDE_FATAL(...)		::VitDragonEngine::Log::GetClientLogger()->fatal(__VA_ARGS__)
-
-// if dist build
-#define VDE_CORE_INFO

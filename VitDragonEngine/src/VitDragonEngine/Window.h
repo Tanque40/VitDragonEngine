@@ -20,7 +20,7 @@ namespace VitDragonEngine{
 
 	// Interface representing a desktop system based window
 	// Platform independent
-	// Is an interface 'couse it need to be inmplemented per platform
+	// Is an interface 'cause it need to be inmplemented per platform
 	class VITDRAGONENGINE_API Window{
 	public:
 		using EventCallbackFn = std::function<void( Event & )>;

@@ -99,10 +99,6 @@ project "SandBox"
 			"VDE_PLATFORM_WINDOWS"
 		}
 
-		postbuildcommands{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/SandBox")
-		}
-
 	filter "configurations:Debug"
 		defines "VDE_DEBUG"
 		symbols "On"
