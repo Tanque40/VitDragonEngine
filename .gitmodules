@@ -7,3 +7,6 @@
 [submodule "VitDragonEngine/vendor/imgui"]
 	path = VitDragonEngine/vendor/imgui
 	url = git@github.com:TheCherno/imgui.git
+[submodule "VitDragonEngine/vendor/glm"]
+	path = VitDragonEngine/vendor/glm
+	url = git@github.com:g-truc/glm.git

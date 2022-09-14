@@ -14,6 +14,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "VitDragonEngine/vendor/GLFW/include"
 IncludeDir["Glad"] = "VitDragonEngine/vendor/Glad/include"
 IncludeDir["ImGui"] = "VitDragonEngine/vendor/imgui/"
+IncludeDir["glm"] = "VitDragonEngine/vendor/glm/"
 
 include "VitDragonEngine/vendor/GLFW" -- Search for lua files
 include "VitDragonEngine/vendor/Glad" -- Search for lua files
@@ -32,7 +33,9 @@ project "VitDragonEngine"
 
 	files {
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
 
 	includedirs {
@@ -40,7 +43,8 @@ project "VitDragonEngine"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links{
@@ -95,7 +99,8 @@ project "SandBox"
 
 	includedirs {
 		"VitDragonEngine/vendor/spdlog/include",
-		"VitDragonEngine/src"
+		"VitDragonEngine/src",
+		"%{IncludeDir.glm}"
 	}
 
 	links {

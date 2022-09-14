@@ -30,7 +30,7 @@ namespace VitDragonEngine{
 
 		dispatcher.Dispatch<WindowCloseEvent>( BIND_EVENT_FN( OnWindowClose ) );
 
-		VDE_CORE_TRACE("{0}", e);
+		//VDE_CORE_TRACE("{0}", e);
 
 		for( auto it = m_LayerStack.end(); it != m_LayerStack.begin(); ){
 			( *--it )->OnEvent( e );
