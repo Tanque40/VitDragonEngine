@@ -5,6 +5,8 @@
 
 #include <glad/glad.h>
 
+#include "Input.h"
+
 namespace VitDragonEngine{
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
@@ -54,6 +56,7 @@ namespace VitDragonEngine{
 			glClear( GL_COLOR_BUFFER_BIT );
 			for( Layer *layer : m_LayerStack )
 				layer->OnUpdate();
+
 			m_Window->OnUpdate();
 		}
 	}

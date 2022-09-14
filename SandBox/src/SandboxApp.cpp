@@ -6,11 +6,20 @@ public:
 		: Layer( "Example" ){ }
 
 	void OnUpdate() override{
-		VDE_INFO( "ExampleLayer::Update" );
+		//VDE_INFO( "ExampleLayer::Update" );
+
+		if( VitDragonEngine::Input::IsKeyPressed( VDE_KEY_TAB ) ){
+			VDE_INFO( "Tab key is pressed!" );
+		}
 	}
 
 	void OnEvent( VitDragonEngine::Event &event ) override{
-		VDE_TRACE( "{0}", event );
+		
+		if( event.GetEventType() == VitDragonEngine::EventType::KeyPressed ){
+			VitDragonEngine::KeyPressedEvent &e = ( VitDragonEngine::KeyPressedEvent & ) event;
+
+			VDE_TRACE( "{0}", ( char ) e.GetKeyCode() );
+		}
 	}
 };
 

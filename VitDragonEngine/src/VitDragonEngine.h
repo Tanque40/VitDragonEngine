@@ -6,6 +6,10 @@
 #include "VitDragonEngine/Layer.h"
 #include "VitDragonEngine/Log.h"
 
+#include "VitDragonEngine/MouseButtonCodes.h"
+#include "VitDragonEngine/KeyCodes.h"
+#include "VitDragonEngine/Input.h"
+
 #include "VitDragonEngine/ImGui/ImGuiLayer.h"
 
 // ---- EntryPonit ---------------
