@@ -1,5 +1,7 @@
 #include <VitDragonEngine.h>
 
+#include "imgui/imgui.h"
+
 class ExampleLayer : public VitDragonEngine::Layer{
 public:
 	ExampleLayer()
@@ -11,6 +13,12 @@ public:
 		if( VitDragonEngine::Input::IsKeyPressed( VDE_KEY_TAB ) ){
 			VDE_INFO( "Tab key is pressed!" );
 		}
+	}
+
+	virtual void OnImGuiRender() override{
+		ImGui::Begin("Test");
+		ImGui::Text( "Hello World" );
+		ImGui::End();
 	}
 
 	void OnEvent( VitDragonEngine::Event &event ) override{
@@ -27,7 +35,6 @@ class SandBox : public VitDragonEngine::Application{
 public:
 	SandBox(){
 		PushLayer( new ExampleLayer() );
-		PushOverlay( new VitDragonEngine::ImGuiLayer() );
 	}
 
 	~SandBox(){

@@ -100,6 +100,7 @@ project "SandBox"
 	includedirs {
 		"VitDragonEngine/vendor/spdlog/include",
 		"VitDragonEngine/src",
+		"VitDragonEngine/vendor",
 		"%{IncludeDir.glm}"
 	}
 
