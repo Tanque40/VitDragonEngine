@@ -1,6 +1,7 @@
 #pragma once
 
 #include "VitDragonEngine/Window.h"
+#include "VitDragonEngine/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>
 
@@ -27,6 +28,7 @@ namespace VitDragonEngine{
 		virtual void Shutdown();
 	private:
 		GLFWwindow *m_Window;
+		GraphicsContext *m_Context;
 
 		struct WindowData{
 			std::string Title;
