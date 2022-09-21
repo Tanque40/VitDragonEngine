@@ -22,8 +22,10 @@ include "VitDragonEngine/vendor/imgui" -- Search for lua files
 
 project "VitDragonEngine"
 	location "VitDragonEngine"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir("bin/" .. outputdir .. "/%{prj.name}")
 	objdir("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -36,6 +38,10 @@ project "VitDragonEngine"
 		"%{prj.name}/src/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl"
+	}
+
+	defines{
+		"_CRT_SECURE_NO_WARNINGS"
 	}
 
 	includedirs {
@@ -55,7 +61,6 @@ project "VitDragonEngine"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
 		staticruntime "On"
 		systemversion "latest"
 
@@ -65,29 +70,27 @@ project "VitDragonEngine"
 			"GLFW_INCLUDE_NONE"
 		}
 
-		postbuildcommands{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/SandBox")
-		}
-
 	filter "configurations:Debug"
 		defines "VDE_DEBUG"
-		buildoptions "/MDd"
-		symbols "On"
+		runtime "Debug"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "VDE_RELEASE"
-		buildoptions "/MD"
-		symbols "On"
+		runtime "Release"
+		symbols "on"
 
 	filter "configurations:Dist"
 		defines "VDE_DIST"
-		buildoptions "/MD"
-		symbols "On"
+		runtime "Release"
+		symbols "on"
 
 project "SandBox"
 	location "SandBox"
 	kind "consoleApp"
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir("bin/" .. outputdir .. "/%{prj.name}")
 	objdir("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -109,7 +112,6 @@ project "SandBox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
 		staticruntime "On"
 		systemversion "latest"
 
@@ -119,15 +121,15 @@ project "SandBox"
 
 	filter "configurations:Debug"
 		defines "VDE_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "VDE_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		symbols "On"
 
 	filter "configurations:Dist"
 		defines "VDE_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		symbols "On"

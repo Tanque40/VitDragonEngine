@@ -21,7 +21,7 @@ namespace VitDragonEngine{
 		EVENT_CLASS_TYPE(MouseMoved)
 		EVENT_CLASS_CATEGORY( EventCategoryMouse | EventCategoryInput )
 	protected:
-		int m_MouseX, m_MouseY;
+		float m_MouseX, m_MouseY;
 	};
 
 	class VITDRAGONENGINE_API MouseScrolledEvent : public Event{
@@ -42,7 +42,7 @@ namespace VitDragonEngine{
 		EVENT_CLASS_TYPE( MouseScrolled )
 		EVENT_CLASS_CATEGORY( EventCategoryMouse | EventCategoryInput )
 	protected:
-		int m_XOffset, m_YOffset;
+		float m_XOffset, m_YOffset;
 	};
 
 	class VITDRAGONENGINE_API MouseButtonEvent : public Event{
