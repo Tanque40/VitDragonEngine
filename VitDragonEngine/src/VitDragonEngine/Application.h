@@ -9,6 +9,8 @@
 
 #include "VitDragonEngine/ImGui/ImGuiLayer.h"
 
+#include "VitDragonEngine/Renderer/Shader.h"
+
 namespace VitDragonEngine{
 
 	class VITDRAGONENGINE_API Application{
@@ -35,6 +37,7 @@ namespace VitDragonEngine{
 		LayerStack m_LayerStack;
 
 		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+		std::unique_ptr<Shader> m_Shader;
 	private:
 		static Application *s_Instance;
 	};
