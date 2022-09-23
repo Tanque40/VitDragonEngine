@@ -17,7 +17,7 @@ namespace VitDragonEngine{
 				return new OpenGLVertexBuffer( vertices, size );
 		}
 
-		VDE_CORE_ASSERT( false, "Unknown REndererAPI!" );
+		VDE_CORE_ASSERT( false, "Unknown RendererAPI!" );
 		return nullptr;
 	}
 
@@ -31,7 +31,7 @@ namespace VitDragonEngine{
 				return new OpenGLIndexBuffer( vertices, size );
 		}
 
-		VDE_CORE_ASSERT( false, "Unknown REndererAPI!" );
+		VDE_CORE_ASSERT( false, "Unknown RendererAPI!" );
 		return nullptr;
 	}
 
