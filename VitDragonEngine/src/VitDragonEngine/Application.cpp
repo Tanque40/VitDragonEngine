@@ -53,7 +53,7 @@ namespace VitDragonEngine{
 	void Application::Run(){
 
 		while( m_Running ){
-			for( Layer *layer : m_LayerStack )
+			for( Layer *layer : m_LayerStck )
 				layer->OnUpdate();
 
 			m_ImGuiLayer->Begin();
