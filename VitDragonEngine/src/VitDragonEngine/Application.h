@@ -9,15 +9,9 @@
 
 #include "VitDragonEngine/ImGui/ImGuiLayer.h"
 
-#include "VitDragonEngine/Renderer/Shader.h"
-#include "VitDragonEngine/Renderer/Buffer.h"
-#include "VitDragonEngine/Renderer/VertexArray.h"
-
-#include "VitDragonEngine/Renderer/OrthographicCamera.h"
-
 namespace VitDragonEngine{
 
-	class VITDRAGONENGINE_API Application{
+	class Application{
 	public:
 		Application();
 		virtual ~Application();
@@ -40,13 +34,6 @@ namespace VitDragonEngine{
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 
-		std::shared_ptr<Shader> m_Shader;
-		std::shared_ptr<VertexArray> m_VertexArray;
-
-		std::shared_ptr<Shader> m_BlueShader;
-		std::shared_ptr<VertexArray> m_SquareVA;
-
-		OrthographicCamera m_Camera;
 	private:
 		static Application *s_Instance;
 	};

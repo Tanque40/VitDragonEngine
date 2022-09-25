@@ -12,6 +12,18 @@
 
 #include "VitDragonEngine/ImGui/ImGuiLayer.h"
 
+// ---- Renderer -----------------
+#include "VitDragonEngine/Renderer/Renderer.h"
+#include "VitDragonEngine/Renderer/RenderCommand.h"
+
+#include "VitDragonEngine/Renderer/Shader.h"
+#include "VitDragonEngine/Renderer/Buffer.h"
+#include "VitDragonEngine/Renderer/VertexArray.h"
+
+#include "VitDragonEngine/Renderer/OrthographicCamera.h"
+// ---- Renderer -----------------
+
+
 // ---- EntryPonit ---------------
 #include "VitDragonEngine/EntryPoint.h"
 // ---- EntryPonit ---------------
