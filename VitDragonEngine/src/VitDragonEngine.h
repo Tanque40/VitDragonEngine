@@ -6,6 +6,8 @@
 #include "VitDragonEngine/Layer.h"
 #include "VitDragonEngine/Log.h"
 
+#include "VitDragonEngine/Core/TimeStep.h"
+
 #include "VitDragonEngine/MouseButtonCodes.h"
 #include "VitDragonEngine/KeyCodes.h"
 #include "VitDragonEngine/Input.h"

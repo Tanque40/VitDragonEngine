@@ -7,6 +7,8 @@
 #include "VitdragonEngine/Events/Event.h"
 #include "VitDragonEngine/Events/ApplicationEvent.h"
 
+#include "VitDragonEngine/Core/TimeStep.h"
+
 #include "VitDragonEngine/ImGui/ImGuiLayer.h"
 
 namespace VitDragonEngine{
@@ -29,11 +31,13 @@ namespace VitDragonEngine{
 	private:
 		bool OnWindowClose( WindowCloseEvent &e );
 
+	private:
 		std::unique_ptr<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 
+		float m_LastFrameTime = 0.0f;
 	private:
 		static Application *s_Instance;
 	};

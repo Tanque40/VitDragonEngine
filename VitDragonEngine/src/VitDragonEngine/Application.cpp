@@ -7,6 +7,8 @@
 
 #include "Input.h"
 
+#include <glfw/glfw3.h>
+
 namespace VitDragonEngine{
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
@@ -53,12 +55,19 @@ namespace VitDragonEngine{
 	void Application::Run(){
 
 		while( m_Running ){
+
+			float time = ( float ) glfwGetTime(); // Platform::GetTime
+			TimeStep timeStep = time - m_LastFrameTime;
+			m_LastFrameTime = time;
+
 			for( Layer *layer : m_LayerStack )
-				layer->OnUpdate();
+				layer->OnUpdate( timeStep );
 
 			m_ImGuiLayer->Begin();
+
 			for( Layer *layer : m_LayerStack )
 				layer->OnImGuiRender();
+
 			m_ImGuiLayer->End();
 
 			m_Window->OnUpdate();

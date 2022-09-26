@@ -3,6 +3,8 @@
 #include "VitDragonEngine/Core.h"
 #include "VitDragonEngine/Events/Event.h"
 
+#include "VitDragonEngine/Core/TimeStep.h"
+
 namespace VitDragonEngine{
 
 	class VITDRAGONENGINE_API Layer{
@@ -12,7 +14,7 @@ namespace VitDragonEngine{
 
 		virtual void OnAttach(){}
 		virtual void OnDetach(){}
-		virtual void OnUpdate(){}
+		virtual void OnUpdate(TimeStep ts){}
 		virtual void OnImGuiRender(){}
 		virtual void OnEvent(Event& event){}
 
