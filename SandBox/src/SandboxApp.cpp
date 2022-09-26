@@ -88,7 +88,7 @@ public:
 
 		m_Shader.reset( new VitDragonEngine::Shader( vertexSrc, fragmentSrc ) );
 
-		std::string BlueVertex = R"(
+		std::string FlatShaderVertexSrc = R"(
 			#version 330 core	
 			
 			layout(location = 0) in vec3 a_Position;
@@ -104,25 +104,25 @@ public:
 			}
 		)";
 
-		std::string BlueFragment = R"(
+		std::string FlatColorShaderFragmentSrc = R"(
 			#version 330 core	
 			
 			layout(location = 0) out vec4 color;
 
 			in vec3 v_Position;
 
+			uniform vec4 u_Color;
+
 			void main(){
-				color = vec4(0.2, 0.3, 0.8, 1.0);
+				color = u_Color;
 			}
 		)";
 
-		m_BlueShader.reset( new VitDragonEngine::Shader( BlueVertex, BlueFragment ) );
+		m_FlatColorShader.reset( new VitDragonEngine::Shader( FlatShaderVertexSrc, FlatColorShaderFragmentSrc ) );
 	
 	}
 
 	void OnUpdate(VitDragonEngine::TimeStep ts) override{
-
-		VDE_TRACE( "Delta Time: {0}s ({1}ms)", ts.GetSeconds(), ts.GetMiliSeconds() );
 
 		if( VitDragonEngine::Input::IsKeyPressed(VDE_KEY_LEFT ) )
 			m_CameraPosition.x -= m_CameraMoveSpeed * ts;
@@ -153,11 +153,22 @@ public:
 
 		static glm::mat4 scale = glm::scale( glm::mat4( 1.0f ), glm::vec3( 0.1f ) );
 
+		glm::vec4 redColor( 0.8, 0.2, 0.3, 1.0 );
+		glm::vec4 blueColor( 0.2, 0.3, 0.8, 1.0 );
+
+		// VitDragonEngine::MaterialRef material = new VitDragonEngine::Material( m_FlatColorShader );
+		// material->Set( "u_Color", redColor );
+		// squareMesh->SetMaterial( material );
+
 		for( int x = 0; x < 20; x++ ){
 			for( int y = 0; y < 20; y++ ){
 				glm::vec3 pos( x * 0.11f, y * 0.11f, 0.0f );
 				glm::mat4 transform = glm::translate( glm::mat4( 1.0f ), pos) * scale;
-				VitDragonEngine::Renderer::Submit( m_BlueShader, m_SquareVA, transform );
+				if( x % 2 == 0 )
+					m_FlatColorShader->UploadUniformFloat4( "u_Color", redColor);
+				else
+					m_FlatColorShader->UploadUniformFloat4( "u_Color", blueColor );
+				VitDragonEngine::Renderer::Submit( m_FlatColorShader, m_SquareVA, transform );
 			}
 		}
 
@@ -178,7 +189,7 @@ private:
 	std::shared_ptr<VitDragonEngine::Shader> m_Shader;
 	std::shared_ptr<VitDragonEngine::VertexArray> m_VertexArray;
 
-	std::shared_ptr<VitDragonEngine::Shader> m_BlueShader;
+	std::shared_ptr<VitDragonEngine::Shader> m_FlatColorShader;
 	std::shared_ptr<VitDragonEngine::VertexArray> m_SquareVA;
 
 	VitDragonEngine::OrthographicCamera m_Camera;
