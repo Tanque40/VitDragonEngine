@@ -20,7 +20,7 @@ public:
 			 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f,
 		};
 
-		std::shared_ptr <VitDragonEngine::VertexBuffer> vertexBuffer;
+		VitDragonEngine::Ref <VitDragonEngine::VertexBuffer> vertexBuffer;
 		vertexBuffer.reset( VitDragonEngine::VertexBuffer::Create( vertices, sizeof( vertices ) ) );
 
 		VitDragonEngine::BufferLayout layout = {
@@ -32,7 +32,7 @@ public:
 		m_VertexArray->AddVertexBuffer( vertexBuffer );
 
 		unsigned int indices[ 3 ] = { 0, 1, 2 };
-		std::shared_ptr <VitDragonEngine::IndexBuffer> indexBuffer;
+		VitDragonEngine::Ref <VitDragonEngine::IndexBuffer> indexBuffer;
 		indexBuffer.reset( VitDragonEngine::IndexBuffer::Create( indices, sizeof( indices ) / sizeof( uint32_t ) ) );
 		m_VertexArray->SetIndexBuffer( indexBuffer );
 
@@ -44,7 +44,7 @@ public:
 			 0.5f,  0.5f, 0.0f,
 			-0.5f,  0.5f, 0.0f
 		};
-		std::shared_ptr<VitDragonEngine::VertexBuffer> squareVB;
+		VitDragonEngine::Ref<VitDragonEngine::VertexBuffer> squareVB;
 		squareVB.reset( VitDragonEngine::VertexBuffer::Create( squareVertices, sizeof( squareVertices ) ) );
 		squareVB->SetLayout( {
 			{ VitDragonEngine::ShaderDataType::Float3, "a_Position"}
@@ -52,7 +52,7 @@ public:
 		m_SquareVA->AddVertexBuffer( squareVB );
 
 		unsigned int squareIndices[ 6 ] = { 0, 1, 2, 2, 3, 0 };
-		std::shared_ptr<VitDragonEngine::IndexBuffer> squareID;
+		VitDragonEngine::Ref<VitDragonEngine::IndexBuffer> squareID;
 		squareID.reset( VitDragonEngine::IndexBuffer::Create( squareIndices, sizeof( squareIndices ) / sizeof( uint32_t ) ) );
 		m_SquareVA->SetIndexBuffer( squareID );
 
@@ -183,11 +183,11 @@ public:
 	}
 
 private:
-	std::shared_ptr<VitDragonEngine::Shader> m_Shader;
-	std::shared_ptr<VitDragonEngine::VertexArray> m_VertexArray;
+	VitDragonEngine::Ref<VitDragonEngine::Shader> m_Shader;
+	VitDragonEngine::Ref<VitDragonEngine::VertexArray> m_VertexArray;
 
-	std::shared_ptr<VitDragonEngine::Shader> m_FlatColorShader;
-	std::shared_ptr<VitDragonEngine::VertexArray> m_SquareVA;
+	VitDragonEngine::Ref<VitDragonEngine::Shader> m_FlatColorShader;
+	VitDragonEngine::Ref<VitDragonEngine::VertexArray> m_SquareVA;
 
 	VitDragonEngine::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
