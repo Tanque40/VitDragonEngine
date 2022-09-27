@@ -19,6 +19,7 @@
 #include "VitDragonEngine/Renderer/RenderCommand.h"
 
 #include "VitDragonEngine/Renderer/Shader.h"
+#include "VitDragonEngine/Renderer/Texture.h"
 #include "VitDragonEngine/Renderer/Buffer.h"
 #include "VitDragonEngine/Renderer/VertexArray.h"
 

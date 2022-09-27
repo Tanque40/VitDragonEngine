@@ -38,16 +38,17 @@ public:
 
 
 		m_SquareVA.reset( VitDragonEngine::VertexArray::Create() );
-		float squareVertices[ 3 * 4 ] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f
+		float squareVertices[ 5 * 4 ] = {
+			-0.5f, -0.5f, 0.0f,		0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f,		1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f,		1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f,		0.0f, 1.0f
 		};
 		VitDragonEngine::Ref<VitDragonEngine::VertexBuffer> squareVB;
 		squareVB.reset( VitDragonEngine::VertexBuffer::Create( squareVertices, sizeof( squareVertices ) ) );
 		squareVB->SetLayout( {
-			{ VitDragonEngine::ShaderDataType::Float3, "a_Position"}
+			{ VitDragonEngine::ShaderDataType::Float3, "a_Position"},
+			{ VitDragonEngine::ShaderDataType::Float2, "a_TextCoord"}
 			} );
 		m_SquareVA->AddVertexBuffer( squareVB );
 
@@ -122,7 +123,46 @@ public:
 		)";
 
 		m_FlatColorShader.reset(VitDragonEngine::Shader::Create( FlatShaderVertexSrc, FlatColorShaderFragmentSrc ) );
-	
+
+
+
+		std::string TextureShaderVertexSrc = R"(
+			#version 330 core	
+			
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TextCoord;
+
+			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
+
+			out vec2 v_TextCoord;
+
+			void main(){
+				v_TextCoord = a_TextCoord;
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
+			}
+		)";
+
+		std::string TextureShaderFragmentSrc = R"(
+			#version 330 core	
+			
+			layout(location = 0) out vec4 color;
+
+			in vec2 v_TextCoord;
+
+			uniform sampler2D u_Texture;
+
+			void main(){
+				color = texture(u_Texture, v_TextCoord);
+			}
+		)";
+
+		m_TextureShader.reset( VitDragonEngine::Shader::Create( TextureShaderVertexSrc, TextureShaderFragmentSrc ) );
+		
+		m_Texture = ( VitDragonEngine::Texture2D::Create( "assets/textures/Checkerboard.png" ) );
+
+		std::dynamic_pointer_cast< VitDragonEngine::OpenGLShader >( m_TextureShader )->Bind();
+		std::dynamic_pointer_cast< VitDragonEngine::OpenGLShader >( m_TextureShader )->UploadUniformInt( "u_Texture", 0 );
 	}
 
 	void OnUpdate(VitDragonEngine::TimeStep ts) override{
@@ -163,11 +203,15 @@ public:
 			for( int y = 0; y < 20; y++ ){
 				glm::vec3 pos( x * 0.11f, y * 0.11f, 0.0f );
 				glm::mat4 transform = glm::translate( glm::mat4( 1.0f ), pos) * scale;
-				VitDragonEngine::Renderer::Submit( m_FlatColorShader, m_SquareVA, transform );
+				VitDragonEngine::Renderer::Submit( m_FlatColorShader, m_SquareVA, transform  );
 			}
 		}
 
-		VitDragonEngine::Renderer::Submit( m_Shader, m_VertexArray );
+		m_Texture->Bind();
+		VitDragonEngine::Renderer::Submit( m_TextureShader, m_SquareVA, glm::scale( glm::mat4( 1.0f ), glm::vec3( 1.5f ) ) );
+
+		// Triangle
+		// VitDragonEngine::Renderer::Submit( m_Shader, m_VertexArray );
 
 		VitDragonEngine::Renderer::EndScene();
 	}
@@ -186,8 +230,10 @@ private:
 	VitDragonEngine::Ref<VitDragonEngine::Shader> m_Shader;
 	VitDragonEngine::Ref<VitDragonEngine::VertexArray> m_VertexArray;
 
-	VitDragonEngine::Ref<VitDragonEngine::Shader> m_FlatColorShader;
+	VitDragonEngine::Ref<VitDragonEngine::Shader> m_FlatColorShader, m_TextureShader;
 	VitDragonEngine::Ref<VitDragonEngine::VertexArray> m_SquareVA;
+
+	VitDragonEngine::Ref<VitDragonEngine::Texture2D> m_Texture;
 
 	VitDragonEngine::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
