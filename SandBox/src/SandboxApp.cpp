@@ -122,9 +122,6 @@ public:
 			}
 		)";
 
-		m_FlatColorShader.reset(VitDragonEngine::Shader::Create( FlatShaderVertexSrc, FlatColorShaderFragmentSrc ) );
-
-
 
 		std::string TextureShaderVertexSrc = R"(
 			#version 330 core	
@@ -157,7 +154,9 @@ public:
 			}
 		)";
 
-		m_TextureShader.reset( VitDragonEngine::Shader::Create( TextureShaderVertexSrc, TextureShaderFragmentSrc ) );
+		m_FlatColorShader.reset(VitDragonEngine::Shader::Create( FlatShaderVertexSrc, FlatColorShaderFragmentSrc ) );
+
+		m_TextureShader.reset( VitDragonEngine::Shader::Create( "assets/shaders/Texture.glsl" ) );
 		
 		m_Texture = ( VitDragonEngine::Texture2D::Create( "assets/textures/Checkerboard.png" ) );
 		m_ChernoLogoTexture = ( VitDragonEngine::Texture2D::Create( "assets/textures/ChernoLogo.png" ) );
