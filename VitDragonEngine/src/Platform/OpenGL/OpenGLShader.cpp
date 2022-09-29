@@ -22,9 +22,17 @@ namespace VitDragonEngine{
 		std::string source = ReadFile( filePath );
 		auto shaderSources = PreProcess( source );
 		Compile(shaderSources);
+
+		// Extract name from filePath
+		auto lastSlash = filePath.find_last_of( "/\\" );
+		lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
+		auto lastDot = filePath.rfind( '.' );
+		auto count = lastDot == std::string::npos ? filePath.size() - lastSlash : lastDot - lastSlash;
+		m_Name = filePath.substr( lastSlash, count );
 	}
 
-	OpenGLShader::OpenGLShader( const std::string& vertexSrc, std::string& fragmentSrc ){
+	OpenGLShader::OpenGLShader( const std::string& name, const std::string& vertexSrc, std::string& fragmentSrc )
+		: m_Name(name){
 		std::unordered_map<GLenum, std::string> sources;
 		sources[ GL_VERTEX_SHADER ] = vertexSrc;
 		sources[ GL_FRAGMENT_SHADER ] = fragmentSrc;
@@ -42,6 +50,10 @@ namespace VitDragonEngine{
 
 	void OpenGLShader::UnBind() const{
 		glUseProgram( 0 );
+	}
+
+	const std::string& VitDragonEngine::OpenGLShader::GetName() const{
+		return m_Name;
 	}
 
 	void OpenGLShader::UploadUniformInt( const std::string& name, int value ){
@@ -82,7 +94,7 @@ namespace VitDragonEngine{
 	std::string OpenGLShader::ReadFile( const std::string& filePath ){
 		std::string result;
 		
-		std::ifstream in( filePath, std::ios::in, std::ios::binary );
+		std::ifstream in( filePath, std::ios::in | std::ios::binary );
 		if( in ){
 			in.seekg( 0, std::ios::end );
 			result.resize( in.tellg() );
@@ -121,7 +133,9 @@ namespace VitDragonEngine{
 	void OpenGLShader::Compile( const std::unordered_map<GLenum, std::string>& ShaderSources ){
 
 		GLint program = glCreateProgram();
-		std::vector<GLenum> glShaderIDs( ShaderSources.size() );
+		VDE_CORE_ASSERT( ShaderSources <= 2, "Only support 2 shaders for now" );
+		std::array<GLenum, 2> glShaderIDs;
+		int glShaderIDIndex = 0;
 		for( auto& kv : ShaderSources ){
 			GLenum type = kv.first;
 			const std::string& source = kv.second;
@@ -151,7 +165,7 @@ namespace VitDragonEngine{
 			}
 
 			glAttachShader( program, shader );
-			glShaderIDs.push_back( shader );
+			glShaderIDs[ glShaderIDIndex++] = shader;
 		}
 
 		// Link our program

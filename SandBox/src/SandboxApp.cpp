@@ -90,7 +90,7 @@ public:
 			}
 		)";
 
-		m_Shader.reset( VitDragonEngine::Shader::Create( vertexSrc, fragmentSrc ) );
+		m_Shader = VitDragonEngine::Shader::Create( "VertexPosColorTriangle", vertexSrc, fragmentSrc);
 
 		std::string FlatShaderVertexSrc = R"(
 			#version 330 core	
@@ -154,15 +154,15 @@ public:
 			}
 		)";
 
-		m_FlatColorShader.reset(VitDragonEngine::Shader::Create( FlatShaderVertexSrc, FlatColorShaderFragmentSrc ) );
+		m_FlatColorShader = VitDragonEngine::Shader::Create( "FlatColor", FlatShaderVertexSrc, FlatColorShaderFragmentSrc);
 
-		m_TextureShader.reset( VitDragonEngine::Shader::Create( "assets/shaders/Texture.glsl" ) );
+		auto textureShader = m_ShaderLibrary.Load( "assets/shaders/Texture.glsl" );
 		
 		m_Texture = ( VitDragonEngine::Texture2D::Create( "assets/textures/Checkerboard.png" ) );
-		m_ChernoLogoTexture = ( VitDragonEngine::Texture2D::Create( "assets/textures/ChernoLogo.png" ) );
+		m_ChernoLogoTexture = ( VitDragonEngine::Texture2D::Create( "assets/textures/vdlogo.png" ) );
 
-		std::dynamic_pointer_cast< VitDragonEngine::OpenGLShader >( m_TextureShader )->Bind();
-		std::dynamic_pointer_cast< VitDragonEngine::OpenGLShader >( m_TextureShader )->UploadUniformInt( "u_Texture", 0 );
+		std::dynamic_pointer_cast< VitDragonEngine::OpenGLShader >( textureShader )->Bind();
+		std::dynamic_pointer_cast< VitDragonEngine::OpenGLShader >( textureShader )->UploadUniformInt( "u_Texture", 0 );
 	}
 
 	void OnUpdate(VitDragonEngine::TimeStep ts) override{
@@ -207,10 +207,12 @@ public:
 			}
 		}
 
+		auto textureShader = m_ShaderLibrary.Get( "Texture" );
+
 		m_Texture->Bind();
-		VitDragonEngine::Renderer::Submit( m_TextureShader, m_SquareVA, glm::scale( glm::mat4( 1.0f ), glm::vec3( 1.5f ) ) );
+		VitDragonEngine::Renderer::Submit( textureShader, m_SquareVA, glm::scale( glm::mat4( 1.0f ), glm::vec3( 1.5f ) ) );
 		m_ChernoLogoTexture->Bind();
-		VitDragonEngine::Renderer::Submit( m_TextureShader, m_SquareVA, glm::scale( glm::mat4( 1.0f ), glm::vec3( 1.5f ) ) );
+		VitDragonEngine::Renderer::Submit( textureShader, m_SquareVA, glm::scale( glm::mat4( 1.0f ), glm::vec3( 1.5f ) ) );
 
 		// Triangle
 		// VitDragonEngine::Renderer::Submit( m_Shader, m_VertexArray );
@@ -229,10 +231,12 @@ public:
 	}
 
 private:
+	VitDragonEngine::ShaderLibrary m_ShaderLibrary;
+
 	VitDragonEngine::Ref<VitDragonEngine::Shader> m_Shader;
 	VitDragonEngine::Ref<VitDragonEngine::VertexArray> m_VertexArray;
 
-	VitDragonEngine::Ref<VitDragonEngine::Shader> m_FlatColorShader, m_TextureShader;
+	VitDragonEngine::Ref<VitDragonEngine::Shader> m_FlatColorShader;
 	VitDragonEngine::Ref<VitDragonEngine::VertexArray> m_SquareVA;
 
 	VitDragonEngine::Ref<VitDragonEngine::Texture2D> m_Texture, m_ChernoLogoTexture;
